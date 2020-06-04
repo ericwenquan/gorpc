@@ -95,6 +95,47 @@ func main() {
 
 See [helloworld](https://github.com/lubanproj/gorpc/tree/master/examples/helloworld) for more details
 
+Or you only need three steps to complete a service call by code generation
+
+1. define a service by .proto file
+2. install protoc-gen-gorpc for code generation
+3. execute protoc 
+
+**1. define a service by .proto file**
+
+```
+synax = "proto3";
+
+package helloworld;
+
+service Greeter {
+    rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+message HelloRequest  {
+	string msg = 1;
+}
+
+message HelloReply  {
+	string msg = 1;
+}
+
+```
+
+**2. install protoc-gen-gorpc for code generation**
+
+```
+go get github.com/lubanproj/protoc-gen-gorpc
+```
+
+**3. execute protoc**
+
+```
+protoc --gorpc_out=plugin:. helloworld.proto
+```
+
+See [helloworld2](https://github.com/lubanproj/gorpc/tree/master/examples/helloworld2) for more details
+
 
 ### Documentation
 - [Examples](https://github.com/lubanproj/gorpc/tree/master/examples).

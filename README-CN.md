@@ -100,6 +100,48 @@ func main() {
 
 更多细节可以参考 [helloworld](https://github.com/lubanproj/gorpc/tree/master/examples/helloworld) 
 
+See [helloworld](https://github.com/lubanproj/gorpc/tree/master/examples/helloworld) for more details
+
+或者以代码生成方式调用全过程
+
+1. 定义一个服务，这里用proto文件的形式进行定义
+2. 安装protoc-gen-gorpc代码生成工具，在终端执行（前提是需要已经安装protoc工具，详情可参考protoc-gen-go安装）
+3. 执行
+
+**1. 定义一个服务，这里用proto文件的形式进行定义**
+
+```
+synax = "proto3";
+
+package helloworld;
+
+service Greeter {
+    rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+message HelloRequest  {
+	string msg = 1;
+}
+
+message HelloReply  {
+	string msg = 1;
+}
+
+```
+
+**2. 安装protoc-gen-gorpc代码生成工具**
+
+```
+go get github.com/lubanproj/protoc-gen-gorpc
+```
+
+**3. 执行**
+
+```
+protoc --gorpc_out=plugin:. helloworld.proto
+```
+
+更多细节可以参考 [helloworld2](https://github.com/lubanproj/gorpc/tree/master/examples/helloworld2) 
 
 ### 文档
 
